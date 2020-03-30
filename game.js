@@ -1,6 +1,6 @@
 //var util = require('util');
 var deck = require('./deck');
-var playingCardDeck = require('./playingCardDeck');
+var playingCardDeck = require('./PlayingCardDeck');
 var shuffle = module.exports = {};
 var defaultOptions = {
   deck: new playingCardDeck().cards,

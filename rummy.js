@@ -1,4 +1,4 @@
-var shuffle = require('/game'),
+var shuffle = require('./game'),
     playerHand = require('./hand'),
     EventEmitter = require('events').EventEmitter,
     util = require('util');

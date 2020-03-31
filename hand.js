@@ -45,5 +45,19 @@ this.pop = function(index)
   {
     return this.cards.splice(Math.floor(Math.random()*this.cards..length), 1);
   };
+  
+  this.shuffle = function() {
+		for (var remainingToShuffle = this.cards.length; remainingToShuffle > 0; remainingToShuffle--) {
+			var randomIndex = Math.floor(Math.random() * remainingToShuffle);
+			swap(this.cards, remainingToShuffle - 1, randomIndex);
+		}
+
+		function swap(array, a, b) {
+			var temp = array[a];
+			array.splice(a, 1, array[b]);
+			array.splice(b, 1, temp);
+		}
+	};
+
     
 };

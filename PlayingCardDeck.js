@@ -1,4 +1,4 @@
-var playingCard = require('./playingcard');
+var playingCard = require(['playingcard']);
 
 module.exports = function(){
   this.cards = [

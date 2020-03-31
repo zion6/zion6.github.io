@@ -19,6 +19,8 @@ var deck,
 
 EventEmitter.call(this);
 
+communityPile = new hand();
+discardPile = new hand();
 player1 = new hand();
 player2 = new hand();
 player3 = new hand();
@@ -60,7 +62,7 @@ function dealCards(){
 function drawFromCommunity(){
 	if(!communityPile)
 	{
-		communityPile.push(discardPile);
+		communityPile.pushCards(discardPile.cards);
 		discardPile.clear();
 	}
 	cardInPlay = communityPile.pop();

@@ -29,5 +29,15 @@ this.pop = function(index)
     if(card && index > -1)
       this.cards.splice(index, 0, card);
   };
+  
+  this.clear = function()
+  {
+    this.cards.splice(0, this.cards.length);
+  };
+  
+  this.drawRandom = function()
+  {
+    return this.cards.splice(Math.floor(Math.random()*this.cards..length), 1);
+  };
     
 };

@@ -196,18 +196,19 @@ function deck(cards, random) {
     }
 }
 
-
+function shuffle()
+{
 var defaultOptions = {
     deck: new PlayingCardDeck().cards,
     numberOfDecks: 2,
     random: function () { return Math.random(); }
 };
 
-shuffle.playingCards = function () {
+this.playingCards = function () {
     return new PlayingCardDeck().cards;
 };
 
-shuffle.shuffle = function (options) {
+this.shuffle = function (options) {
     if (!options)
         options = defaultOptions;
 
@@ -227,6 +228,7 @@ shuffle.shuffle = function (options) {
     }
 
     return new deck(options.deck, options.random);
+}
 }
 
 

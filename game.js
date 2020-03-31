@@ -3,13 +3,13 @@ var deck = require('./deck');
 var playingCardDeck = require('./PlayingCardDeck');
 var shuffle = module.exports = {};
 var defaultOptions = {
-  deck: new playingCardDeck().cards,
-  numberOfDecks : 1,
+  deck: new PlayingCardDeck().cards,
+  numberOfDecks : 2,
   random: function(){ return Math.random(); }
 };
 
 shuffle.playingCards = function(){
-  return new playingCardDeck().cards;
+  return new PlayingCardDeck().cards;
 };
 
 shuffle.shuffle = function(options){

@@ -294,7 +294,7 @@ function playerHand(cards) {
 
 
 
-var deck,
+var cDeck,
     player1,
     player2,
     player3,
@@ -308,8 +308,6 @@ var deck,
     cardInPlay;
 
 
-EventEmitter.call(this);
-
 communityPile = new playerHand();
 discardPile = new playerHand();
 player1 = new playerHand();
@@ -321,28 +319,28 @@ player6 = new playerHand();
 
 alert('beforeShuffle' + deck);
 // Shuffle all decks
-deck = shuffle.shuffle({ numberOfDecks: 2 });
+cDeck = shuffle.shuffle({ numberOfDecks: 2 });
 
-alert('afterShuffle' + deck);
+alert('afterShuffle' + cDeck);
 
 // Deal the cards
 function dealCards() {
     switch (numberOfPlayers) {
         case 2:
-            alert('dealing' + deck);
-            deck.deal(13, [player1, player2]);
+            alert('dealing' + cDeck);
+            cDeck.deal(13, [player1, player2]);
             break;
         case 3:
-            deck.deal(13, [player1, player2, player3]);
+            cDeck.deal(13, [player1, player2, player3]);
             break;
         case 4:
-            deck.deal(13, [player1, player2, player3, player4]);
+            cDeck.deal(13, [player1, player2, player3, player4]);
             break;
         case 5:
-            deck.deal(13, [player1, player2, player3, player4, player5]);
+            cDeck.deal(13, [player1, player2, player3, player4, player5]);
             break;
         case 6:
-            deck.deal(13, [player1, player2, player3, player4, player5, player6]);
+            cDeck.deal(13, [player1, player2, player3, player4, player5, player6]);
             break;
     };
 }

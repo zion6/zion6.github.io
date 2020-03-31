@@ -1,7 +1,7 @@
-var shuffle = require('./game'),
-    playerHand = require('./hand'),
-    EventEmitter = require('events').EventEmitter,
-    util = require('util');
+var shuffle = require(['game']),
+    playerHand = require(['hand']),
+    EventEmitter = require(['events']).EventEmitter,
+    util = require(['util']);
     
 var deck,
     	player1,

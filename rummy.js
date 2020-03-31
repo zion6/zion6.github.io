@@ -38,7 +38,6 @@ alert('afterShuffle' + deck);
 function dealCards(){
 	switch(numberOfPlayers)
 	{
-		case default: 
 		case 2:
 			alert('dealing' + deck);
 			deck.deal(13, [player1, player2]);

@@ -19,21 +19,20 @@ var deck,
 
 EventEmitter.call(this);
 
-communityPile = new hand();
-discardPile = new hand();
-player1 = new hand();
-player2 = new hand();
-player3 = new hand();
-player4 = new hand();
-player5 = new hand();
-player6 = new hand();
+communityPile = new playerHand();
+discardPile = new playerHand();
+player1 = new playerHand();
+player2 = new playerHand();
+player3 = new playerHand();
+player4 = new playerHand();
+player5 = new playerHand();
+player6 = new playerHand();
 
 // Shuffle all decks
 deck = shuffle.shuffle({numberOfDecks:2});
 
 
 // Deal the cards
-
 function dealCards(){
 	switch(numberOfPlayers)
 	{
@@ -83,15 +82,16 @@ function drawJoker()
 }
 
 // Drop player hand
-function dropHand(playerHand)
+function dropHand(pHand)
 {
-  communityPile.push(playerHand);
-  playerHand.clear();
+  communityPile.push(pHand);
+  pHand.clear();
 }
 
 // Declare Rummy
-function declareRummy(playerHand)
+function declareRummy(pHand)
 {
+	//show all hands!
 }
 
 // end game

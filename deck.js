@@ -1,63 +1,102 @@
-"use strict";
+module.exports = function(cards, random){
+  this.reset = function(){
+    this.cards = cards.slice(0);
+    this.length = this.cards.length;
+  };
+  this.shuffle = function(){
+    fisherYates(this.cards);
+  };
 
-var Deck = (function () {
-	var RANKS = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
-	var SUITS = ["diamonds", "clubs", "hearts", "spades"];
-	var DECK_SIZE = RANKS.length * SUITS.length;
+  this.reset();
+  this.shuffle();
 
-	function createDeck() {
-		var cards = [];
+  this.deal = function(numberOfCards, arrayOfHands){
+    for(var i = 0; i < numberOfCards; i++)
+      for(var j = 0; j < arrayOfHands.length; j++)
+        arrayOfHands[j].push(this.cards.pop());
+    this.length = this.cards.length;
+  };
 
-		for (var i = 0; i < DECK_SIZE; i++) {
-			cards.push({
-				suitIndex: Math.floor(i / RANKS.length),
-				suit: SUITS[Math.floor(i / RANKS.length)],
+  this.draw = function(num){
+    if(!num || num <= 1){
+      this.length = this.cards.length - 1;
+      return this.cards.pop();
+    }
 
-				rankIndex: i % RANKS.length,
-				rank: RANKS[i % RANKS.length]
-			});
-		}
-		return {
-			cards: cards,
-			shuffle: function () {
-				shuffleDeck(cards);
-			},
-			sort: function () {
-				sortDeck(cards);
-			}
-		};
-	}
+    var ret = [];
+    for(var i = 0; i < num; i++)
+      ret.push(this.cards.pop());
+    this.length = this.cards.length;
+    return ret;
+  };
 
-	function sortDeck(cards) {
-		cards.sort(function (a, b) {
-			if (a.suitIndex < b.suitIndex ||
-				(a.suitIndex == b.suitIndex && a.rankIndex < b.rankIndex)) {
-				return -1;
-			}
-			return 1;
-		});
-	}
+  this.drawFromBottomOfDeck = function(num){
+    if(!num || num < 1) {
+      num = 1;
+    }
 
-	function shuffleDeck(cards) {
-		shuffle(cards);
-	}
+    var ret = [];
+    for(var i = 0; i < num; i++) {
+      ret.push(this.cards.shift());
+    }
+    this.length = this.cards.length;
 
-	// Fisher–Yates shuffle
-	// https://bost.ocks.org/mike/shuffle/
-	function shuffle(array) {
-		for (var remainingToShuffle = array.length; remainingToShuffle > 0; remainingToShuffle--) {
-			var randomIndex = Math.floor(Math.random() * remainingToShuffle);
-			swap(array, remainingToShuffle - 1, randomIndex);
-		}
+    if (ret.length === 1) {
+      return ret[0];
+    } else {
+      return ret;
+    }
+  };
 
-		// https://vuejs.org/v2/guide/list.html#Caveats
-		// Use splice instead of direct assignment (eg. array[b] = temp) to keep modifications observable
-		function swap(array, a, b) {
-			var temp = array[a];
-			array.splice(a, 1, array[b]);
-			array.splice(b, 1, temp);
-		}
-	}
+  this.drawRandom = function(num){
+    var _draw = function(){
+      var index = Math.floor(random() * this.cards.length);
+      var card = this.cards[index];
+      this.cards.splice(index, 1);
+      this.length = this.cards.length;
+      return card;
+    };
 
-	return createDeck;
-})();
+    if(!num || num <= 1){
+      return _draw.apply(this);
+    }else{
+      var cards = [];
+      for(var i = 0; i < num; i++){
+        cards.push(_draw.apply(this));
+      }
+      return cards;
+    }
+  };
+
+  this.putOnTopOfDeck = function(cards){
+    if(!cards instanceof Array)
+      this.cards.push(cards);
+    else
+      for(var i = 0; i < cards.length; i++)
+        this.cards.push(cards[i]);
+    this.length = this.cards.length;
+  };
+
+  this.putOnBottomOfDeck = function(cards){
+    if(!cards instanceof Array)
+      this.cards.unshift(cards);
+    else
+      for(var i = 0; i < cards.length; i++)
+        this.cards.unshift(cards[i]);
+    this.length = this.cards.length;
+  };
+
+  //array shuffling algorithm: http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+  function fisherYates(arr){
+    var i = arr.length;
+    if(i === 0)
+      return false;
+    while(--i){
+       var j = Math.floor(random() * (i + 1));
+       var tempi = arr[i];
+       var tempj = arr[j];
+       arr[i] = tempj;
+       arr[j] = tempi;
+    }
+  }
+};

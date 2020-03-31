@@ -10,6 +10,12 @@ else
     this.cards.push(card);
   };
   
+  this.pushCards = function(cardsArray)
+  {
+    for(var i = 0; i < cardsArray.length; i++)
+      cards.push(cardsArray[i]);
+  }
+  
   this.toString = function(){
     var ret = [];
     for(var i = 0; i < this.cards.length; i++)

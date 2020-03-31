@@ -28,9 +28,11 @@ player4 = new playerHand();
 player5 = new playerHand();
 player6 = new playerHand();
 
+alert('beforeShuffle' + deck);
 // Shuffle all decks
 deck = shuffle.shuffle({numberOfDecks:2});
 
+alert('afterShuffle' + deck);
 
 // Deal the cards
 function dealCards(){
@@ -38,6 +40,7 @@ function dealCards(){
 	{
 		case default: 
 		case 2:
+			alert('dealing' + deck);
 			deck.deal(13, [player1, player2]);
 			break;
 		case 3:
